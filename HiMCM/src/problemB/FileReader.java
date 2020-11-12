@@ -1,5 +1,7 @@
 package problemB;
 
+import java.util.ArrayList;
+
 public class FileReader{
   File f;
 
@@ -8,12 +10,12 @@ public class FileReader{
 	}
 
 	public Plant[] read(){
-    Scanner sc = new Scanner(f).useDelimiter(",");
+    //reading file
+    Scanner sc1 = new Scanner(f);
+    Scanner sc2 = new Scanner(f).useDelimiter(",");
 
-    while(sc.hasNext()){
-      
+    while(sc1.hasNextLine()){
+      String line = sc1.
     }
-
-
 	}
 }

@@ -6,23 +6,29 @@ public class Plant {
 	private double ben;
 	private double tax;
 	private double feas;
+	private String id;
+
 	private ArrayList<Double> costs;
 
-	public Plant(double[] data) {
+	public Plant(double[] data, String s) {
 		ben = data[0];
 		ben = data[1];
 		ben = data[2];
+		id = s;
 
+		//add all 48 data cells into costs
 		for (double d : data){
 			costs.add(d);
 		}
 
+		//remove trailing zeros in costs
 		for(int i = data.length - 1; i >= 0; i--){
 			while (costs.get(i) == 0){
 				costs.remove(i);
 			}
 		}
 
+		//debugging code
 		for(double d : costs){
 			System.out.println("cost " +d);
 		}
@@ -42,6 +48,10 @@ public class Plant {
 
 	public ArrayList<Double> getBen(){
 		return costs;
+	}
+
+	public String getId(){
+		return id;
 	}
   /**
   public static void main(String[] args){
