@@ -8,10 +8,12 @@ public class Plant {
 	private double feas;
 	private ArrayList<Double> costs;
 	
-	public Plant(double[] data) {
+	public Plant(double[] data, String in) {
 		
 	}
 	
-	
+	public ArrayList<Double> getCosts(){
+		return null;
+	}
 	
 }
