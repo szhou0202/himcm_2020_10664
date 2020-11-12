@@ -31,7 +31,10 @@ public class Alg{
 	}
 	
 	public int[] optimalScheduleFromGroup(Plant[] group) {
+		
+		double highestN = 0.0;
 		if(group.length == 3) {
+			int[] bestStarts = new int[]{0,0,0};
 			for(int a = 0; a<25-group[1].getCosts().size(); a++) {
 				ArrayList<Double> costA = (ArrayList<Double>) Collections.nCopies(a, 0.0);
 				costA.addAll(group[1].getCosts());
@@ -45,10 +48,59 @@ public class Alg{
 						costA.addAll(group[1].getCosts());
 						costA.addAll((ArrayList<Double>) Collections.nCopies(25-costA.size(), 0.0));
 						
+						int[] starts = new int[]{a,b,c};
+						
+						double sum = 0;
+						double maxPrice = 0;
+						double[] prices = new double[3];
+						int totalYears = 0;
+						for(int x = 0; x<3; x++) {
+							totalYears += group[x].getCosts().size();
+							double price = group[x].getCosts().stream().reduce(0.0, (subtotal, element) -> subtotal + element);
+							prices[x] = price;
+							if(price>maxPrice) {
+								maxPrice = price;
+							}
+							sum += price;
+						}
+						
+						double sumB = 0;
+						double sumU = 0;
+						double sumF = 0;
+						double sumP = 0;
+						for(int x = 0; x<3; x++) {
+							sumB += group[x].getBen()*(26-starts[x])/25.0;
+							sumU += group[x].getTax()*(26-starts[x])/25.0;
+							sumF += group[x].getFeas()*(26-starts[x])/25.0;
+							sumP += Math.pow(Math.E, (prices[x]/maxPrice)-1)*starts[x]/(25-group[x].getCosts().size());
+						}
+						
+						double S = (1*sumB + 3*sumU + 3*sumF + 1* sumP)/(3*(1+3+3+1));
+						
+						double totalCost;
+						double average = sum/totalYears;
+						double sumOfValueMinusMeanSquared = 0;
+						for(int y = 0; y<25; y++){
+							totalCost = costA.get(0)+costB.get(0)+costC.get(0);
+							sumOfValueMinusMeanSquared = Math.pow(totalCost-average, 2);
+						}
+						
+						double standardDev = Math.sqrt(sumOfValueMinusMeanSquared/25);
+						
+						double N = 1 * standardDev + 1 * S;
+						
+						if (N>highestN) {
+							highestN = N;
+							bestStarts = starts;
+						};
 					}
 				}
 			}
+			
+			return bestStarts;
+			
 		} else {
+			int[] bestStarts = new int[]{0,0,0,0,0};
 			for(int a = 0; a<25-group[1].getCosts().size(); a++) {
 				ArrayList<Double> costA = (ArrayList<Double>) Collections.nCopies(a, 0.0);
 				costA.addAll(group[1].getCosts());
@@ -73,23 +125,54 @@ public class Alg{
 								int[] starts = new int[]{a,b,c,d,e};
 								
 								double sum = 0;
+								double maxPrice = 0;
+								double[] prices = new double[5];
+								int totalYears = 0;
+								for(int x = 0; x<5; x++) {
+									totalYears += group[x].getCosts().size();
+									double price = group[x].getCosts().stream().reduce(0.0, (subtotal, element) -> subtotal + element);
+									prices[x] = price;
+									if(price>maxPrice) {
+										maxPrice = price;
+									}
+									sum += price;
+								}
+								
 								double sumB = 0;
 								double sumU = 0;
 								double sumF = 0;
 								double sumP = 0;
 								for(int x = 0; x<5; x++) {
-									sum += group[x].getCosts().stream().reduce(0.0, (subtotal, element) -> subtotal + element);
-									//sumB += group[x].get
+									sumB += group[x].getBen()*(26-starts[x])/25.0;
+									sumU += group[x].getTax()*(26-starts[x])/25.0;
+									sumF += group[x].getFeas()*(26-starts[x])/25.0;
+									sumP += Math.pow(Math.E, (prices[x]/maxPrice)-1)*starts[x]/(25-group[x].getCosts().size());
 								}
 								
+								double S = (1*sumB + 3*sumU + 3*sumF + 1* sumP)/(5*(1+3+3+1));
 								
+								double totalCost;
+								double average = sum/totalYears;
+								double sumOfValueMinusMeanSquared = 0;
+								for(int y = 0; y<25; y++){
+									totalCost = costA.get(0)+costB.get(0)+costC.get(0)+costD.get(0)+costE.get(0);
+									sumOfValueMinusMeanSquared = Math.pow(totalCost-average, 2);
+								}
+								
+								double standardDev = Math.sqrt(sumOfValueMinusMeanSquared/25);
+								
+								double N = 1 * standardDev + 1 * S;
+								
+								if (N>highestN) {
+									highestN = N;
+									bestStarts = starts;
+								};
 							}
 						}
 					}
 				}
 			}
+			return bestStarts;
 		}
-		
-		return null;
 	}
 }
