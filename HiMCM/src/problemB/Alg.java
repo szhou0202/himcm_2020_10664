@@ -2,8 +2,8 @@ package problemB;
 
 public class Alg{
 	public static void main(String[] args) {
-		double[][] data = new FileReader("fileName").read();
+		Plant[] data = new FileReader("fileName").read();
 	}
 	
-	//public double[][][] find groups
+	public Plant[] 
 }
