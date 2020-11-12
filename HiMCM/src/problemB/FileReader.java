@@ -11,7 +11,7 @@ public class FileReader{
     Scanner sc = new Scanner(f).useDelimiter(",");
 
     while(sc.hasNext()){
-
+      
     }
 
 
