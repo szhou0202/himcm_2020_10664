@@ -34,6 +34,6 @@ public class FileReader{
       }
       p[counter] = new Plant(d, id);
     }
-
+    return p;
 	}
 }
