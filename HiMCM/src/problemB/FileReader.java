@@ -1,11 +1,17 @@
 package problemB;
 
 public class FileReader{
-	public FileReader(String fileName){
+  File f;
 
+  public FileReader(String fileName){
+    f = new File(filename);
 	}
 
-	public double[][] read(){
-		return null;
+	public Plant[] read(){
+    Scanner sc = new Scanner(f).useDelimiter(",");
+
+    for i in
+
+
 	}
 }
