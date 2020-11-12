@@ -5,7 +5,7 @@ public class FileReader{
 
 	}
 
-	public double[][] read(){
+	public Plant[] read(){
 		return null;
 	}
 }
