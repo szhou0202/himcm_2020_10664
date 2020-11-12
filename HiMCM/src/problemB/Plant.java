@@ -27,6 +27,22 @@ public class Plant {
 			System.out.println("cost " +d);
 		}
 	}
+
+	public double getBen(){
+		return ben;
+	}
+
+	public double getTax(){
+		return tax;
+	}
+
+	public double getFeas(){
+		return feas;
+	}
+
+	public ArrayList<Double> getBen(){
+		return costs;
+	}
   /**
   public static void main(String[] args){
 		Plant p = new Plant();
