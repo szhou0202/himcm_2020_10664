@@ -46,7 +46,7 @@ public class Plant {
 		return feas;
 	}
 
-	public ArrayList<Double> getBen(){
+	public ArrayList<Double> getCosts(){
 		return costs;
 	}
 
