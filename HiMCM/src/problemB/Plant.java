@@ -12,27 +12,28 @@ public class Plant {
 
 
 	public Plant(double[] data, String s) {
+		costs = new ArrayList<Double>();
 		ben = data[0];
-		ben = data[1];
-		ben = data[2];
+		tax = data[1];
+		feas = data[2];
 		id = s;
 
 		//add all 48 data cells into costs
-		for (double d : data){
-			costs.add(d);
+		for (int i = 3; i<data.length; i++){
+			costs.add(data[i]);
 		}
 
 		//remove trailing zeros in costs
-		for(int i = data.length - 1; i >= 0; i--){
-			while (costs.get(i) == 0){
-				costs.remove(i);
-			}
+		int i = costs.size()-1;
+		while (costs.get(i) == 0){
+			costs.remove(i);
+			i--;
 		}
 
 		//debugging code
-		for(double d : costs){
+		/*for(double d : costs){
 			System.out.println("cost " +d);
-		}
+		}*/
 	}
 
 	public double getBen(){

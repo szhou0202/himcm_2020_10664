@@ -32,7 +32,7 @@ public class FileReader{
       for(int i = 0; i < 28; i++){
         d[i] = sc2.nextDouble();
       }
-      p[counter]=new Plant(d, id));
+      p[counter]=new Plant(d, id);
       counter++;
     }
     return p;
